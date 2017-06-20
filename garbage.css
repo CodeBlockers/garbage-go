@@ -1,0 +1,88 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+}
+
+header h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: mediumseagreen;
+}
+
+.map {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 100%;
+}
+
+.map .filter, .map .selection {
+    position: fixed;
+}
+
+.map .filter {
+    bottom: 20px;
+    left: 50%;
+    width: 800px;
+    background-color: white;
+    padding: 12px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.map .selection {
+    left: 20px;
+    top: 60px;
+    background-color: white;
+    padding: 12px;
+}
+
+h3 {
+    color: #555;
+    font-size: 14px;
+}
+.map form {
+    border: none;
+}
+
+.map fieldset {
+    padding: 6px 6px 12px;
+    border: none;
+    display: inline-block;
+    width: 350px;
+}
+
+.map fieldset h3 {
+    margin-bottom: 6px;
+}
+
+.map fieldset label:not(:first-child) {
+    margin-left: 6px;
+}
+
+.map #selected {
+    padding: 12px;
+}

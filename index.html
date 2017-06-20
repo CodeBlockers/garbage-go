@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Garbage Go</title>
+    <link rel="stylesheet" type="text/css" href="garbage.css" />
+</head>
+<body>
+    <header><h1>Garbage Go</h1></header>
+    <section class="map">
+        <div id="map"></div>
+        <div class="filter">
+            <form id="filter">
+                <fieldset class="icons status">
+                    <h3>Status</h3>
+                    <label><input type="checkbox" name="status" value="full">full</label>
+                    <label><input type="checkbox" name="status" value="halffull">half full</label>
+                    <label><input type="checkbox" name="status" value="empty">empty</label>
+                    <script>
+                        var checkboxes = document.getElementsByName("status");
+                        checkboxes.forEach(function (obj) {
+                            obj.addEventListener("change", function(evt) {
+                                if(obj.checked) {
+
+                                }
+                            });
+                        });
+                    </script>
+                </fieldset>
+
+                <fieldset class="icons type">
+                    <h3>Type</h3>
+                    <label><input type="checkbox" name="type">paper</label>
+                    <label><input type="checkbox" name="type">plastic</label>
+                    <label><input type="checkbox" name="type">metal</label>
+                    <label><input type="checkbox" name="type">glass</label>
+                    <label><input type="checkbox" name="type">organic</label>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="selection">
+            <h3>Generate Colletion Route</h3>
+            <form id="route-points">
+                <ul id="selected" class="empty">
+                    <p>empty list</p>
+                </ul>
+                <button type="button" class="success" id="generate">Generate route</button>
+            </form>
+
+        </div>
+    </section>
+
+    <script>
+        var map;
+        var route = [];
+        function initMap() {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: new google.maps.LatLng(-33.91722, 151.23064),
+                mapTypeId: 'roadmap'
+            });
+
+            directionsDisplay.setMap(map);
+
+            var generateRoute = function() {
+                if(document.getElementById("selected").children.length > 1) {
+                    var start = route[0];
+                    var end = route[route.length - 1];
+                    var stops = [];
+                    route.slice(1,route.slice.length - 2).forEach(function (value, index, array) {
+                        stops.push({'location': value, 'stopover': true});
+                    });
+                    var request = {
+                        origin: start,
+                        destination: end,
+                        waypoints: stops,
+                        travelMode: 'WALKING'
+                    };
+                    directionsService.route(request, function(result, status) {
+                        if (status == 'OK') {
+                            directionsDisplay.setDirections(result);
+                        } else {
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+                }
+            };
+
+            document.getElementById("generate").addEventListener("click", generateRoute, false);
+
+
+            //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+            var icons = {
+                normal_can: {
+                    icon: 'normal_can.png'
+                },
+                empty_can: {
+                    icon: 'empty_can.png'
+                },
+                full_can: {
+                    icon: 'full_can.png'
+                }
+            };
+
+            var features = [
+                {
+                    position: new google.maps.LatLng(-33.91721, 151.22630),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91539, 151.22820),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91747, 151.22912),
+                    type: 'empty_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91910, 151.22907),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91725, 151.23011),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91872, 151.23089),
+                    type: 'empty_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91784, 151.23094),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91682, 151.23149),
+                    type: 'empty_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91790, 151.23463),
+                    type: 'empty_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91666, 151.23468),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.916988, 151.233640),
+                    type: 'normal_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91662347903106, 151.22879464019775),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.916365282092855, 151.22937399734496),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91665018901448, 151.2282474695587),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.919543720969806, 151.23112279762267),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91608037421864, 151.23288232673644),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91851096391805, 151.2344058214569),
+                    type: 'full_can'
+                }, {
+                    position: new google.maps.LatLng(-33.91818154739766, 151.2346203981781),
+                    type: 'full_can'
+                }
+            ];
+
+            // Create markers.
+            features.forEach(function(feature) {
+                var marker = new google.maps.Marker({
+                    position: feature.position,
+                    icon: icons[feature.type].icon,
+                    map: map
+                });
+
+                google.maps.event.addDomListener(marker, 'click', function() {
+                    addToList(marker);
+                });
+            });
+        }
+
+        var addToList = function(marker) {
+            var list = document.getElementById("selected");
+            if(list.classList.contains("empty")) {
+                list.innerHTML = "";
+                list.classList.remove("empty");
+            }
+            var li = document.createElement("li");
+            var txt = document.createTextNode(marker.position.toString());
+            route.push(marker.position);
+            li.appendChild(txt);
+            list.appendChild(li);
+        };
+
+
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJYR0Gq6FzotqAxHd2I8SM-f6tHMc79t4&callback=initMap">
+    </script>
+
+</body>
+</html>

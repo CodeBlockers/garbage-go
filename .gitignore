@@ -1,3 +1,5 @@
+## JAVA IGNORES
+
 # Compiled class file
 *.class
 
@@ -23,3 +25,68 @@ hs_err_pid*
 
 # Report / Jenkins / MVN
 target/
+
+## Maven 
+target/
+
+## IntelliJ project files 
+*.iml
+*.iws
+*.ipr
+.idea/
+
+## eclipse project file
+.settings/
+.classpath
+.project
+
+## ECLIPSE IGNORES
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
