@@ -43,14 +43,6 @@ public class ColetorMBEan implements CRUDController<Coletor>{
 		this.coletorService = new ColetorService();
 	}
 	
-	public Coletor getColetor() {
-		return coletor;
-	}
-
-	public void setColetor(Coletor coletor) {
-		this.coletor = coletor;
-	}
-
 	/**
 	 * Métodos de CRUD - Criar, Visualizar, Editar, Deletar
 	 */
@@ -62,7 +54,7 @@ public class ColetorMBEan implements CRUDController<Coletor>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return this.irParaLista();
 	}
 
 
@@ -86,7 +78,7 @@ public class ColetorMBEan implements CRUDController<Coletor>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return this.irParaLista();
 	}
 
 
@@ -98,6 +90,48 @@ public class ColetorMBEan implements CRUDController<Coletor>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return this.irParaLista();
+	}
+	
+	/**
+	 * Métodos de navegação
+	 */
+	private String getDir() {
+		return "./pages/coletor/";
+	}
+	
+	public String irParaCriar() {
+		this.inicializar();
+		
+		return this.getDir() + "criar.jsf";
+	}
+	
+	public String irParaEditar(Coletor obj) {
+		this.coletor = obj;
+		
+		return this.getDir() + "editar.jsf";
+	}
+	
+	public String irParaVisualizar(Coletor obj) {
+		this.coletor = obj;
+		
+		return this.getDir() + "visualizar.jsf";
+	}
+	
+	public String irParaLista() {
+		return this.getDir() + "lista.jsf";
+	}
+	
+	
+	
+	/**
+	 * GETs e SETs
+	 */
+	public Coletor getColetor() {
+		return coletor;
+	}
+
+	public void setColetor(Coletor coletor) {
+		this.coletor = coletor;
 	}
 }
