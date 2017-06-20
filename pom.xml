@@ -23,6 +23,16 @@
         <scope></scope>
     </dependency>
      -->
+     
+     <!-- https://mvnrepository.com/artifact/javax.faces/jsf-api -->
+	<dependency>
+	    <groupId>javax.faces</groupId>
+	    <artifactId>jsf-api</artifactId>
+	    <version>2.1</version>
+	    <scope>provided</scope>
+	</dependency>
+     
+     
   </dependencies>
   <build>
     <finalName>garbage-go</finalName>
