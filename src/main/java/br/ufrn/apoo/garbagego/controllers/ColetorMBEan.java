@@ -1,11 +1,16 @@
 package br.ufrn.apoo.garbagego.controllers;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import br.ufrn.apoo.garbagego.domain.Coletor;
 import br.ufrn.apoo.garbagego.domain.Localizacao;
 import br.ufrn.apoo.garbagego.exceptions.NegocioException;
 import br.ufrn.apoo.garbagego.services.CRUDService;
 import br.ufrn.apoo.garbagego.services.ColetorService;
 
+@ManagedBean(name="coletorMBean")
+@SessionScoped
 public class ColetorMBEan implements CRUDController<Coletor>{
 	
 	/**
